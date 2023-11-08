@@ -1,0 +1,32 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpenseTracker.MainPage">
+
+    <VerticalStackLayout Spacing="25" Padding="30">
+        <Label Text="Expense Tracker" 
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" 
+               FontSize="Large"/>
+
+        <!-- The form to add a new expense -->
+        <HorizontalStackLayout>
+            <Entry x:Name="descriptionEntry" Placeholder="Description" />
+            
+            
+        </HorizontalStackLayout>
+
+        <Entry x:Name="amountEntry" Placeholder="Amount" Keyboard="Numeric" />
+        <!-- Removed the second Picker with the same x:Name -->
+
+        <Picker x:Name="categoryPicker" Title="Category" ItemDisplayBinding="{Binding Name}"
+        SelectedIndexChanged="OnCategorySelected">
+            <!-- Items will be added in the code-behind -->
+        </Picker>
+
+        <Button Text="Add Expense" Clicked="OnAddExpenseClicked" />
+
+        <!-- The button to navigate to the page with all expenses -->
+        <Button Text="View All Expenses" Clicked="OnViewAllExpensesClicked" />
+
+    </VerticalStackLayout>
+</ContentPage>
