@@ -1,0 +1,54 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpenseTracker.MainPage"
+             BackgroundColor="#E8EAF6">
+
+    <VerticalStackLayout Spacing="15" Padding="20" HorizontalOptions="FillAndExpand">
+
+        <Label Text="Expense Tracker" 
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="#3F51B5"/>
+
+        <Entry x:Name="descriptionEntry" 
+               Placeholder="Description"
+               BackgroundColor="#FFFFFF"
+               PlaceholderColor="#9E9E9E"
+               TextColor="#212121"
+               Margin="0,5,0,5"
+               HeightRequest="40"/>
+
+        <Entry x:Name="amountEntry" 
+               Placeholder="Amount"
+               Keyboard="Numeric"
+               BackgroundColor="#FFFFFF"
+               PlaceholderColor="#9E9E9E"
+               TextColor="#212121"
+               Margin="0,5,0,5"
+               HeightRequest="40"/>
+
+        <Picker x:Name="categoryPicker" 
+                Title="Category"
+                BackgroundColor="#FFFFFF"
+                TextColor="#212121"
+                ItemDisplayBinding="{Binding Name}">    
+            <!-- Items will be added in the code-behind -->
+        </Picker>
+
+
+        <Button Text="Add Expense" 
+                BackgroundColor="#4CAF50"
+                TextColor="White"
+                Margin="0,5,0,5"
+                HeightRequest="50"
+                CornerRadius="20"/>
+
+        <Button Text="View All Expenses" 
+                BackgroundColor="#2196F3"
+                TextColor="White"
+                Margin="0,5,0,5"
+                HeightRequest="50"
+                CornerRadius="20"/>
+    </VerticalStackLayout>
+</ContentPage>
