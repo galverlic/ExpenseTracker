@@ -12,6 +12,11 @@
         Route="MainPage" />
 
     <ShellContent
+        Title="Expenses Pie Chart"
+        ContentTemplate="{DataTemplate local:ExpensesPieChartPage}"
+        Route="ExpensesPieChart" />
+    
+    <ShellContent
         Title="All Expenses"
         ContentTemplate="{DataTemplate local:AllExpensesPage}"
         Route="AllExpenses" />

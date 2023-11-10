@@ -1,0 +1,15 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             x:Class="ExpenseTracker.Pages.ExpensesPieChartPage">
+
+    <chart:SfCircularChart>
+        <chart:SfCircularChart.Series>
+            <chart:PieSeries ItemsSource="{Binding AggregatedExpenseData}"
+                             XBindingPath="CategoryName"
+                             YBindingPath="TotalAmount"
+                             ShowDataLabels="True">
+            </chart:PieSeries>
+        </chart:SfCircularChart.Series>
+    </chart:SfCircularChart>
+</ContentPage>

@@ -44,6 +44,14 @@
                 HeightRequest="50"
                 CornerRadius="20"/>
 
+        <Button Text="View Expense Chart"
+                BackgroundColor="#FF9800"
+                TextColor="White"
+                Margin="0,5,0,5"
+                HeightRequest="50"
+                CornerRadius="20"
+                Clicked="OnViewExpenseChartClicked" />
+        
         <Button Text="View All Expenses" 
                 BackgroundColor="#2196F3"
                 TextColor="White"

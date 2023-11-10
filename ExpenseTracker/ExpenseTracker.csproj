@@ -52,10 +52,21 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.13" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="Syncfusion.Maui.Charts" Version="23.1.44" />
+		<PackageReference Include="Syncfusion.Maui.Core" Version="23.1.44" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Pages\ExpensesPieChartPage.xaml.cs">
+	    <DependentUpon>ExpensesPieChartPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Pages\AllExpensesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ExpensesPieChartPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -30,6 +30,12 @@ namespace ExpenseTracker.Pages
             LoadExpenses();
         }
 
+        public MainPage(DatabaseService databaseService)
+        {
+            InitializeComponent();
+            _databaseService = databaseService;
+        }
+
         private async void LoadExpenses()
         {
             var expenses = await _databaseService.GetExpensesAsync();
@@ -118,6 +124,15 @@ namespace ExpenseTracker.Pages
                 await DisplayAlert("Invalid Input", "Please enter a valid amount.", "OK");
             }
         }
+
+        private async void OnViewExpenseChartClicked(object sender, EventArgs e)
+        {
+            var expensesPieChartPage = new ExpensesPieChartPage(_databaseService);
+            await Navigation.PushAsync(expensesPieChartPage);
+        }
+
+
+
         private void OnViewAllExpensesClicked(object sender, EventArgs e)
         {
             Shell.Current.GoToAsync("//AllExpenses");
