@@ -3,62 +3,83 @@
              x:Class="ExpenseTracker.Pages.MainPage"
              BackgroundColor="#E8EAF6">
 
-    <VerticalStackLayout Spacing="15" Padding="20" HorizontalOptions="FillAndExpand">
+    <VerticalStackLayout Spacing="25" Padding="30" HorizontalOptions="FillAndExpand">
 
-        <Label Text="Expense Tracker" 
-               FontSize="28"
+        <Label Text="Expense Tracker"
+               FontSize="34"
                FontAttributes="Bold"
                HorizontalOptions="Center"
-               TextColor="#3F51B5"/>
+               TextColor="#5E35B1"
+               Margin="0,0,0,10"/>
 
-        <Entry x:Name="descriptionEntry" 
-               Placeholder="Description"
-               BackgroundColor="#FFFFFF"
-               PlaceholderColor="#9E9E9E"
-               TextColor="#212121"
-               Margin="0,5,0,5"
-               HeightRequest="40"/>
+        <Frame CornerRadius="10" Padding="0" HasShadow="True" BackgroundColor="#FFFFFF" Margin="0,10">
+            <Entry x:Name="descriptionEntry"
+                   Placeholder="Description"
+                   PlaceholderColor="#9E9E9E"
+                   TextColor="#212121"
+                   FontSize="Medium"/>
+        </Frame>
 
-        <Entry x:Name="amountEntry" 
+        <Frame CornerRadius="10" Padding="0" HasShadow="True" BackgroundColor="#FFFFFF" Margin="0,10">
+
+            <Entry x:Name="amountEntry"
                Placeholder="Amount"
                Keyboard="Numeric"
                BackgroundColor="#FFFFFF"
                PlaceholderColor="#9E9E9E"
                TextColor="#212121"
-               Margin="0,5,0,5"
-               HeightRequest="40"/>
+               Margin="0,10,0,10"
+               HeightRequest="50"
+               FontSize="Medium"
+               />
+        </Frame>
+        <Frame CornerRadius="10" Padding="0" HasShadow="True" BackgroundColor="#FFFFFF" Margin="0,10">
 
-        <Picker x:Name="categoryPicker" 
+            <Picker x:Name="categoryPicker"
                 Title="Category"
                 BackgroundColor="#FFFFFF"
                 TextColor="#212121"
-                ItemDisplayBinding="{Binding Name}">    
-            <!-- Items will be added in the code-behind -->
-        </Picker>
+                ItemDisplayBinding="{Binding Name}"
+                Margin="0,10,0,10"
+                HeightRequest="50"
+                FontSize="Medium">
 
 
-        <Button Text="Add Expense" 
-                BackgroundColor="#4CAF50"
+
+            </Picker>
+        </Frame>
+
+
+
+        <Button Text="Add Expense"
+                BackgroundColor="#3F51B5"
                 TextColor="White"
                 Margin="0,5,0,5"
                 HeightRequest="50"
-                CornerRadius="20"/>
+                CornerRadius="20"
+                Clicked="OnAddExpenseClicked" />
 
         <Button Text="View Expense Chart"
-                BackgroundColor="#FF9800"
+                BackgroundColor="#9C27B0"
                 TextColor="White"
-                Margin="0,5,0,5"
+                            Margin="0,5,0,5"
                 HeightRequest="50"
                 CornerRadius="20"
                 Clicked="OnViewExpenseChartClicked" />
-        
-        <Button Text="View All Expenses" 
-                BackgroundColor="#2196F3"
+
+
+
+
+
+
+        <Button Text="View All Expenses"
+                BackgroundColor="#607D8B"
                 TextColor="White"
                 Margin="0,5,0,5"
                 HeightRequest="50"
                 CornerRadius="20"
-                Clicked="OnViewAllExpensesClicked" />       
+                Clicked="OnViewAllExpensesClicked" />
+
 
     </VerticalStackLayout>
 </ContentPage>
