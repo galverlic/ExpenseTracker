@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace ExpenseTracker
+namespace ExpenseTracker.Platforms.iOS
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

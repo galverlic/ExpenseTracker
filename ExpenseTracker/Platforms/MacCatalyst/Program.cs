@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace ExpenseTracker
+namespace ExpenseTracker.Platforms.MacCatalyst
 {
     public class Program
     {

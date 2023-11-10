@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Maui;
+using ExpenseTracker.Data;
 using ExpenseTracker.Pages;
-using ExpenseTracker.Services;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
 
@@ -19,6 +19,7 @@ namespace ExpenseTracker
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("RaphLanokFuture-PvDx.ttf", "RaphLanokFuture");
                 });
             builder.Services.AddSingleton<DatabaseService>();
 

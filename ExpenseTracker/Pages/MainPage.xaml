@@ -6,11 +6,11 @@
     <VerticalStackLayout Spacing="25" Padding="30" HorizontalOptions="FillAndExpand">
 
         <Label Text="Expense Tracker"
-               FontSize="34"
+               FontSize="48"
                FontAttributes="Bold"
                HorizontalOptions="Center"
                TextColor="#5E35B1"
-               Margin="0,0,0,10" />
+               FontFamily="RaphLanokFuture" />
 
         <Frame CornerRadius="10" Padding="0" HasShadow="True" BackgroundColor="#FFFFFF" Margin="0,10">
             <Entry x:Name="DescriptionEntry"
@@ -28,7 +28,6 @@
                    BackgroundColor="#FFFFFF"
                    PlaceholderColor="#9E9E9E"
                    TextColor="#212121"
-                   Margin="0,10,0,10"
                    HeightRequest="50"
                    FontSize="Medium" />
         </Frame>
@@ -39,7 +38,6 @@
                     BackgroundColor="#FFFFFF"
                     TextColor="#212121"
                     ItemDisplayBinding="{Binding Name}"
-                    Margin="0,10,0,10"
                     HeightRequest="50"
                     FontSize="Medium">
 
@@ -48,6 +46,7 @@
         </Frame>
 
         <Button Text="Add Income"
+                FontSize="Large"
                 BackgroundColor="Green"
                 TextColor="White"
                 Margin="0,5,0,5"
@@ -55,7 +54,8 @@
                 CornerRadius="20"/>
 
         <Button Text="Add Expense"
-                BackgroundColor="#3F51B5"
+                FontSize="Large"
+                BackgroundColor="Red"
                 TextColor="White"
                 Margin="0,5,0,5"
                 HeightRequest="50"
@@ -63,6 +63,7 @@
                 Clicked="OnAddExpenseClicked" />
 
         <Button Text="View Expense Chart"
+                FontSize="Large"
                 BackgroundColor="#9C27B0"
                 TextColor="White"
                 Margin="0,5,0,5"
@@ -71,6 +72,7 @@
                 Clicked="OnViewExpenseChartClicked" />
 
         <Button Text="View All Expenses"
+                FontSize="Large"
                 BackgroundColor="#607D8B"
                 TextColor="White"
                 Margin="0,5,0,5"

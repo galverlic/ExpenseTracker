@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace ExpenseTracker
+namespace ExpenseTracker.Platforms.MacCatalyst
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

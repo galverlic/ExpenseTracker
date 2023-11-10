@@ -1,7 +1,7 @@
 ﻿using ExpenseTracker.Models;
 using SQLite;
 
-namespace ExpenseTracker.Services
+namespace ExpenseTracker.Service
 {
     public class ExpenseService
     {
