@@ -1,26 +1,37 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ExpenseTracker.Pages.AllExpensesPage">
+    <StackLayout>
+        <Label Text="All Expenses"
+               FontSize="Large"
+               TextColor="Purple"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="10"/>
 
-    <CollectionView x:Name="expensesCollectionView">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Grid Padding="10" RowDefinitions="Auto, Auto, Auto">
-                    <Label Grid.Row="0" 
-                           Text="{Binding Description}" 
-                           FontAttributes="Bold" 
-                           FontSize="Medium" 
-                           Margin="5"/>
-                    <Label Grid.Row="1" 
-                           Text="{Binding Amount, StringFormat='{0:C}'}" 
-                           FontSize="Small" 
-                           Margin="5"/>
-                    <Label Grid.Row="2" 
-                           Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}" 
-                           FontSize="Small" 
-                           Margin="5"/>
-                </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+        <CollectionView x:Name="ExpensesCollectionView" SelectionMode="Single" SelectionChanged="OnExpenseSelected">
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate>
+                    <Grid Padding="10" RowDefinitions="Auto, Auto, Auto">
+                        <Label Grid.Row="0"
+                           Text="{Binding Description}"
+                           FontAttributes="Bold"
+                           FontSize="Medium"
+                           Margin="5" />
+                        <Label Grid.Row="1"
+                           Text="{Binding Amount, StringFormat='{0:C}'}"
+                           FontSize="Small"
+                           Margin="5" />
+                        <Label Grid.Row="2"
+                           Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}"
+                           FontSize="Small"
+                           Margin="5" />
+
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
 </ContentPage>

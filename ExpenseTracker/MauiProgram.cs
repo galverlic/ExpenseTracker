@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Pages;
+﻿using CommunityToolkit.Maui;
+using ExpenseTracker.Pages;
 using ExpenseTracker.Services;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
@@ -12,6 +13,7 @@ namespace ExpenseTracker
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureSyncfusionCore()
                 .ConfigureFonts(fonts =>
                 {

@@ -51,11 +51,21 @@ namespace ExpenseTracker.Services
             await _database.DeleteAsync(expense);
         }
 
-        public async Task DeleteExpenseCategoryAsync(ExpenseCategory category)
-        {
-            await _database.DeleteAsync(category);
-        }
+        // COMMENTED BECAUSE I DO NOT NEED TO DO THIS
+
+        //public async Task DeleteExpenseCategoryAsync(ExpenseCategory category)
+        //{
+        //    await _database.DeleteAsync(category);
+        //}
+
+
 
         // Additional methods for updating and deleting expenses and categories
+
+        // METHOD TO UPDATE AN EXPENSE
+        public async Task UpdateExpenseAsync(Expense expense)
+        {
+            await _database.UpdateAsync(expense);
+        }
     }
 }
