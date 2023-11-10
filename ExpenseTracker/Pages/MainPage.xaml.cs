@@ -133,9 +133,10 @@ namespace ExpenseTracker.Pages
 
 
 
-        private void OnViewAllExpensesClicked(object sender, EventArgs e)
+        private async void OnViewAllExpensesClicked(object sender, EventArgs e)
         {
-            Shell.Current.GoToAsync("//AllExpenses");
+            var allExpensesPage = new AllExpensesPage(_databaseService);
+            await Navigation.PushAsync(allExpensesPage);
         }
 
 
