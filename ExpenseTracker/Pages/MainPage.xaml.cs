@@ -3,7 +3,7 @@ using ExpenseTracker.Services;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
-namespace ExpenseTracker
+namespace ExpenseTracker.Pages
 {
     public partial class MainPage : ContentPage
     {

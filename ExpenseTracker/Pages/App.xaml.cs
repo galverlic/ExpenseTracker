@@ -1,6 +1,6 @@
 ﻿using ExpenseTracker.Services;
 
-namespace ExpenseTracker
+namespace ExpenseTracker.Pages
 {
     public partial class App : Application
     {

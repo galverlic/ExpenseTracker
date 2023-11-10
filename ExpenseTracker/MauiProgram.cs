@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using ExpenseTracker.Pages;
+using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker
 {
@@ -16,7 +17,7 @@ namespace ExpenseTracker
                 });
 
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

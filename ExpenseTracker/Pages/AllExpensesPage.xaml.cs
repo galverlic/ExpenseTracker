@@ -1,4 +1,4 @@
-namespace ExpenseTracker
+namespace ExpenseTracker.Pages
 {
 
     public partial class AllExpensesPage : ContentPage
