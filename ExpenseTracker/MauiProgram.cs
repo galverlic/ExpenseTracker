@@ -20,6 +20,8 @@ namespace ExpenseTracker
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     fonts.AddFont("RaphLanokFuture-PvDx.ttf", "RaphLanokFuture");
+                    fonts.AddFont("Montserrat-Italic-VariableFont_wght", "Montserrat1");
+                    fonts.AddFont("Montserrat-VariableFont_wght", "Montserrat2");
                 });
             builder.Services.AddSingleton<DatabaseService>();
 

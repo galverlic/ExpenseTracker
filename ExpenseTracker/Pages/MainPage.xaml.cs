@@ -33,22 +33,17 @@ public partial class MainPage : ContentPage
         _databaseService = databaseService;
     }
 
-
-
     private async void OnAddIncomeClicked(object sender, EventArgs e)
     {
-        /*
+        var addIncomePage = new AddIncomePage(_databaseService);
+        await Navigation.PushAsync(addIncomePage);
 
-
-
-         */
     }
     private async void OnAddExpenseClicked(object sender, EventArgs e)
     {
         var addExpensesPage = new AddExpensePage(_databaseService);
         await Navigation.PushAsync(addExpensesPage);
     }
-
 
     private async void OnViewExpenseChartClicked(object sender, EventArgs e)
     {

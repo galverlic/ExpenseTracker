@@ -50,6 +50,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\Montserrat-Italic-VariableFont_wght.ttf" />
+	  <None Remove="Resources\Fonts\Montserrat-VariableFont_wght.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.13" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
@@ -69,6 +74,9 @@
 
 	<ItemGroup>
 		<MauiXaml Update="Pages\AddExpensePage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\AddIncomePage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Pages\AllExpensesPage.xaml">

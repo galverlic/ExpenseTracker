@@ -1,9 +1,16 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ExpenseTracker.Pages.MainPage"
-             BackgroundColor="#E8EAF6">
+             x:Class="ExpenseTracker.Pages.MainPage">
 
-    <VerticalStackLayout Spacing="25" Padding="30" HorizontalOptions="FillAndExpand">
+    <ContentPage.Resources>
+        <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#E8EAF6" Offset="0.1" />
+            <GradientStop Color="#C5CAE9" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Spacing="25" Padding="30" HorizontalOptions="FillAndExpand"
+                         Background="{StaticResource BackgroundGradient}">
 
         <Label Text="Expense Tracker"
                FontSize="48"
@@ -48,23 +55,41 @@
             </Grid>
         </Frame>
 
-        <Button Text="View Expense Chart"
-                FontSize="Large"
-                BackgroundColor="#9C27B0"
-                TextColor="White"
-                Margin="0,5,0,5"
-                HeightRequest="50"
-                CornerRadius="20"
-                Clicked="OnViewExpenseChartClicked" />
+        <Frame Padding="0" HasShadow="False" CornerRadius="20" BackgroundColor="#9C27B0">
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-        <Button Text="View All Expenses"
-                FontSize="Large"
-                BackgroundColor="#607D8B"
-                TextColor="White"
-                Margin="0,5,0,5"
-                HeightRequest="50"
-                CornerRadius="20"
+                <Image Source="Resources/graph.png" Aspect="AspectFit"
+                HeightRequest="30" WidthRequest="30" Grid.Column="0" />
+
+                <Button Text="View Expense Chart"
+                FontSize="Large" TextColor="White"
+                BackgroundColor="Transparent" Grid.Column="1"
+                HorizontalOptions="Start" VerticalOptions="Center"
+                Clicked="OnViewExpenseChartClicked" />
+            </Grid>
+        </Frame>
+
+        <Frame Padding="0" HasShadow="False" CornerRadius="20" BackgroundColor="#9C27B0">
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Image Source="Resources/capital.png" Aspect="AspectFit"
+                HeightRequest="30" WidthRequest="30" Grid.Column="0" />
+
+                <Button Text="View All Expenses"
+                FontSize="Large" TextColor="White"
+                BackgroundColor="Transparent" Grid.Column="1"
+                HorizontalOptions="Start" VerticalOptions="Center"
                 Clicked="OnViewAllExpensesClicked" />
+            </Grid>
+        </Frame>
 
     </VerticalStackLayout>
 </ContentPage>

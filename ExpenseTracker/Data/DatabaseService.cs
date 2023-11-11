@@ -22,6 +22,8 @@ namespace ExpenseTracker.Data
         {
             await _database.CreateTableAsync<Expense>();
             await _database.CreateTableAsync<ExpenseCategory>();
+            await _database.CreateTableAsync<Income>();
+            await _database.CreateTableAsync<IncomeCategory>();
         }
         public async Task<int> SaveExpenseAsync(Expense expense)
         {
@@ -46,6 +48,10 @@ namespace ExpenseTracker.Data
             return await _database.Table<ExpenseCategory>().ToListAsync();
         }
 
+        public async Task<List<IncomeCategory>> GetIncomeCategoriesAsync()
+        {
+            return await _database.Table<IncomeCategory>().ToListAsync();
+        }
         public async Task<int> UpdateExpenseAsync(Expense expense)
         {
             return await _database.UpdateAsync(expense);
@@ -54,7 +60,7 @@ namespace ExpenseTracker.Data
         {
             return await _database.DeleteAsync(expense);
         }
-        public async Task AddDefaultCategoriesAsync()
+        public async Task AddDefaultExpenseCategoriesAsync()
         {
             var defaultCategories = new List<ExpenseCategory>
     {
@@ -69,6 +75,26 @@ namespace ExpenseTracker.Data
             {
                 // Check if the category already exists to avoid duplicates
                 var existingCategory = await _database.Table<ExpenseCategory>()
+                                                      .FirstOrDefaultAsync(c => c.Name == category.Name);
+                if (existingCategory == null)
+                {
+                    await _database.InsertAsync(category);
+                }
+            }
+        }
+        public async Task AddDefaultIncomeCategoriesAsync()
+        {
+            var defaultCategories = new List<IncomeCategory>
+    {
+        new IncomeCategory { Name = "Sallary" },
+        new IncomeCategory { Name = "Gift" },
+
+    };
+
+            foreach (var category in defaultCategories)
+            {
+                // Check if the category already exists to avoid duplicates
+                var existingCategory = await _database.Table<IncomeCategory>()
                                                       .FirstOrDefaultAsync(c => c.Name == category.Name);
                 if (existingCategory == null)
                 {

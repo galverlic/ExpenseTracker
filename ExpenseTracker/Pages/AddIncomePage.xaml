@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpenseTracker.Pages.AddIncomePage"
+             Title="Add Income">
+    <VerticalStackLayout Spacing="25" Padding="30">
+
+        <!-- Title or Header for the Page -->
+        <Label Text="Add Income"
+               FontSize="Large"
+               HorizontalOptions="Center"
+               VerticalOptions="Start" />
+
+        <!-- Description Entry -->
+        <Frame CornerRadius="10" Padding="0" HasShadow="True" BackgroundColor="#FFFFFF" Margin="0,10">
+            <Entry x:Name="DescriptionEntry"
+                   Placeholder="Description"
+                   PlaceholderColor="#9E9E9E"
+                   TextColor="#212121"
+                   FontSize="Medium" />
+        </Frame>
+
+        <!-- Amount Entry -->
+        <Frame CornerRadius="10" Padding="0" HasShadow="True" BackgroundColor="#FFFFFF" Margin="0,10">
+            <Entry x:Name="AmountEntry"
+                   Placeholder="Amount"
+                   Keyboard="Numeric"
+                   BackgroundColor="#FFFFFF"
+                   PlaceholderColor="#9E9E9E"
+                   TextColor="#212121"
+                   FontSize="Medium" />
+        </Frame>
+
+        <!-- Category Picker -->
+        <Frame CornerRadius="10" Padding="0" HasShadow="True" BackgroundColor="#FFFFFF" Margin="0,10">
+            <Picker x:Name="CategoryPicker"
+                    Title="Category"
+                    BackgroundColor="#FFFFFF"
+                    TextColor="#212121"
+                    ItemDisplayBinding="{Binding Name}"
+                    FontSize="Medium" />
+        </Frame>
+
+        <!-- Additional elements like buttons can be added here -->
+        <!-- Save Button -->
+        <Button x:Name="SaveButton"
+                   Text="Save"
+                    FontSize="Medium"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    Margin="0,10,0,0"
+                    CornerRadius="20"
+                    Clicked="OnSaveClicked" />
+
+        <!-- Cancel Button -->
+        <Button x:Name="CancelButton"
+                    Text="Cancel"
+                    FontSize="Medium"
+                    BackgroundColor="#F44336"
+                    TextColor="White"
+                    Margin="0,10,0,0"
+                    CornerRadius="20"
+                    Clicked="OnCancelClicked" />
+
+    </VerticalStackLayout>
+</ContentPage>
