@@ -32,7 +32,11 @@ namespace ExpenseTracker.Pages
             await _databaseService.UpdateExpenseAsync(_expense);
 
             // Close the current page
-            Close();
+            if (this is Popup popup)
+            {
+                popup.Close();
+            }
+
         }
 
     }
