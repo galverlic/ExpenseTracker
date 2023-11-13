@@ -1,5 +1,5 @@
-using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using ExpenseTracker.Service;
 using System.Collections.ObjectModel;
 
 namespace ExpenseTracker.Pages;
@@ -7,12 +7,12 @@ namespace ExpenseTracker.Pages;
 public partial class AddExpensePage : ContentPage
 {
     private readonly ObservableCollection<ExpenseCategory> _categories;
-    private readonly DatabaseService _databaseService;
+    private readonly ExpenseService _expenseService;
     private readonly ObservableCollection<Expense> _expenses;
-    public AddExpensePage(DatabaseService databaseService)
+    public AddExpensePage(ExpenseService expenseService)
     {
         InitializeComponent();
-        _databaseService = databaseService;
+        _expenseService = expenseService;
         _categories = new ObservableCollection<ExpenseCategory>();
         CategoryPicker.ItemsSource = _categories;
         LoadCategoriesAndDefaults();
@@ -20,13 +20,13 @@ public partial class AddExpensePage : ContentPage
 
     private async void LoadCategoriesAndDefaults()
     {
-        await App.DatabaseService.AddDefaultExpenseCategoriesAsync();
+        await App.ExpenseService.AddDefaultExpenseCategoriesAsync();
         LoadCategories();
     }
 
     private async void LoadCategories()
     {
-        var categories = await App.DatabaseService.GetExpenseCategoriesAsync();
+        var categories = await App.ExpenseService.GetExpenseCategoriesAsync();
         _categories.Clear();
         foreach (var category in categories) _categories.Add(category);
         _categories.Add(new ExpenseCategory { Name = "Add your own" });
@@ -48,7 +48,7 @@ public partial class AddExpensePage : ContentPage
         if (!string.IsNullOrWhiteSpace(result))
         {
             var newCategory = new ExpenseCategory { Name = result };
-            await App.DatabaseService.SaveExpenseCategoryAsync(newCategory);
+            await App.ExpenseService.SaveExpenseCategoryAsync(newCategory);
             _categories.Add(newCategory);
             CategoryPicker.SelectedItem = newCategory;
         }
@@ -79,7 +79,7 @@ public partial class AddExpensePage : ContentPage
                 CategoryId = selectedCategory.Id
             };
 
-            await _databaseService.SaveExpenseAsync(expense);
+            await _expenseService.SaveExpenseAsync(expense);
 
             // Optionally clear the form or navigate away after saving
             DescriptionEntry.Text = string.Empty;

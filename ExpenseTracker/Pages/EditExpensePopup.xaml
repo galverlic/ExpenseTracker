@@ -14,19 +14,75 @@
                TextColor="#5E35B1"
                Margin="0,0,0,10" />
 
-        <Entry x:Name="DescriptionEntry" Placeholder="Description"/>
-
+        <!-- Description Entry with Icon -->
         <Frame CornerRadius="10" Padding="0" HasShadow="True" BackgroundColor="#FFFFFF" Margin="0,10">
-            <Picker x:Name="CategoryPicker"
-                    Title="Category"
-                    BackgroundColor="#FFFFFF"
-                    TextColor="#212121"
-                    ItemDisplayBinding="{Binding Name}"
-                    FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="DescriptionEntry"
+                Grid.Column="1"
+                Placeholder="Description"
+                PlaceholderColor="#9E9E9E"
+                TextColor="#212121"
+                FontSize="Medium" />
+            </Grid>
         </Frame>
 
-        <Entry x:Name="AmountEntry" Placeholder="Amount" Keyboard="Numeric"/>
-        <DatePicker x:Name="DateEntry" />
-        <Button Text="Save" Clicked="OnSaveClicked"/>
+        <!-- Amount Entry -->
+        <Frame CornerRadius="10" Padding="0" HasShadow="True" BackgroundColor="#FFFFFF" Margin="0,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="AmountEntry"
+             Grid.Column="1"
+             Placeholder="Amount"
+             Keyboard="Numeric"
+             PlaceholderColor="#9E9E9E"
+             TextColor="#212121"
+             FontSize="Medium" />
+            </Grid>
+        </Frame>
+
+        <!-- Category Picker -->
+        <Frame CornerRadius="10" Padding="0" HasShadow="True" BackgroundColor="#FFFFFF" Margin="0,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Picker x:Name="CategoryPicker"
+                 Grid.Column="1"
+                 Title="Category"
+                 BackgroundColor="Transparent"
+                 TextColor="#212121"
+                 ItemDisplayBinding="{Binding Name}"
+                 FontSize="Medium" />
+            </Grid>
+        </Frame>
+
+        <!-- Additional elements like buttons can be added here -->
+        <!-- Save Button -->
+        <Button x:Name="SaveButton"
+         Text="Save"
+         FontSize="Medium"
+         BackgroundColor="#4CAF50"
+         TextColor="White"
+         Margin="0,10,0,0"
+         CornerRadius="20"
+         Clicked="OnSaveClicked" />
+
+        <!-- Cancel Button -->
+        <Button x:Name="CancelButton"
+             Text="Cancel"
+             FontSize="Medium"
+             BackgroundColor="Red"
+             TextColor="White"
+             Margin="0,10,0,0"
+             CornerRadius="20"
+             Clicked="OnCancelClicked" />
     </VerticalStackLayout>
 </toolkit:Popup>

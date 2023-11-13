@@ -1,5 +1,5 @@
-using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using ExpenseTracker.Service;
 using System.Collections.ObjectModel;
 
 namespace ExpenseTracker.Pages
@@ -7,13 +7,13 @@ namespace ExpenseTracker.Pages
 
     public partial class ExpensesPieChartPage : ContentPage
     {
-        private readonly DatabaseService _databaseService;
+        private readonly ExpenseService _expenseService;
         public ObservableCollection<ExpenseData> AggregatedExpenseData { get; set; }
 
-        public ExpensesPieChartPage(DatabaseService databaseService)
+        public ExpensesPieChartPage(ExpenseService expenseService)
         {
             InitializeComponent();
-            _databaseService = databaseService;
+            _expenseService = expenseService;
             InitializePage();
         }
 
@@ -28,10 +28,10 @@ namespace ExpenseTracker.Pages
 
         private async void LoadAggregatedExpenses()
         {
-            var categories = await _databaseService.GetExpenseCategoriesAsync();
+            var categories = await _expenseService.GetExpenseCategoriesAsync();
             var categoryMap = categories.ToDictionary(cat => cat.Id, cat => cat.Name);
 
-            var expenses = await _databaseService.GetExpensesAsync(); // Fetch expenses from database
+            var expenses = await _expenseService.GetExpensesAsync(); // Fetch expenses from database
             var aggregatedData = expenses
                 .GroupBy(e => e.CategoryId)
                 .Where(group => categoryMap.ContainsKey(group.Key))

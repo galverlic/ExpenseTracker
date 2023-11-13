@@ -1,5 +1,6 @@
 ﻿using ExpenseTracker.Models;
 using SQLite;
+using System.Collections.ObjectModel;
 
 namespace ExpenseTracker.Service
 {
@@ -21,6 +22,38 @@ namespace ExpenseTracker.Service
         {
             return await _database.Table<ExpenseCategory>().ToListAsync();
         }
+
+
+        public async Task AddDefaultExpenseCategoriesAsync()
+        {
+            var defaultCategories = new List<ExpenseCategory>
+        {
+            new ExpenseCategory { Name = "Health" },
+            new ExpenseCategory { Name = "Bills" },
+            new ExpenseCategory { Name = "Grocery" },
+            new ExpenseCategory { Name = "Entertainment" },
+            new ExpenseCategory { Name = "Eating Out" }
+        };
+
+            foreach (var category in defaultCategories)
+            {
+                // Check if the category already exists to avoid duplicates
+                var existingCategory = await _database.Table<ExpenseCategory>()
+                                                      .FirstOrDefaultAsync(c => c.Name == category.Name);
+                if (existingCategory == null)
+                {
+                    await _database.InsertAsync(category);
+                }
+            }
+        }
+
+        public async Task<ObservableCollection<ExpenseCategory>> LoadExpenseCategoriesAsync()
+        {
+            var categories = new ObservableCollection<ExpenseCategory>(await GetExpenseCategoriesAsync());
+            categories.Add(new ExpenseCategory { Name = "Add your own" });
+            return categories;
+        }
+
 
         public async Task SaveExpenseAsync(Expense expense)
         {

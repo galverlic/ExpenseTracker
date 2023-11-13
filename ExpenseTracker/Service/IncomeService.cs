@@ -24,6 +24,27 @@ namespace ExpenseTracker.Service
             return await _database.Table<IncomeCategory>().ToListAsync();
         }
 
+        public async Task AddDefaultIncomeCategoriesAsync()
+        {
+            var defaultCategories = new List<IncomeCategory>
+        {
+            new IncomeCategory { Name = "Sallary" },
+            new IncomeCategory { Name = "Gift" },
+
+        };
+
+            foreach (var category in defaultCategories)
+            {
+                // Check if the category already exists to avoid duplicates
+                var existingCategory = await _database.Table<IncomeCategory>()
+                                                      .FirstOrDefaultAsync(c => c.Name == category.Name);
+                if (existingCategory == null)
+                {
+                    await _database.InsertAsync(category);
+                }
+            }
+        }
+
         public async Task SaveIncomeAsync(Income income)
         {
             if (income.Id != 0)

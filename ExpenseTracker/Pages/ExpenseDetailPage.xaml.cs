@@ -1,18 +1,18 @@
 using CommunityToolkit.Maui.Views;
-using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using ExpenseTracker.Service;
 
 namespace ExpenseTracker.Pages;
 
 public partial class ExpenseDetailPage : ContentPage
 {
     private readonly Expense _expense;
-    private readonly DatabaseService _databaseService;
-    public ExpenseDetailPage(Expense expense, DatabaseService databaseService)
+    private readonly ExpenseService _expenseService;
+    public ExpenseDetailPage(Expense expense, ExpenseService expenseService)
     {
         InitializeComponent();
         _expense = expense;
-        _databaseService = databaseService;
+        _expenseService = expenseService;
         BindingContext = _expense; // Set the binding context to the expense.
     }
 
@@ -20,7 +20,7 @@ public partial class ExpenseDetailPage : ContentPage
     private async void OnEditClicked(object sender, EventArgs e)
     {
         var expenseToEdit = (Expense)((Button)sender).BindingContext;
-        var editExpensePopup = new EditExpensePopup(expenseToEdit, _databaseService);
+        var editExpensePopup = new EditExpensePopup(expenseToEdit, _expenseService);
 
         // This is the correct way to display a Popup
         await this.ShowPopupAsync(editExpensePopup);
@@ -32,7 +32,7 @@ public partial class ExpenseDetailPage : ContentPage
         bool isConfirmed = await DisplayAlert("Delete", "Are you sure you want to delete this expense?", "Yes", "No");
         if (isConfirmed)
         {
-            await _databaseService.DeleteExpenseAsync(_expense);
+            await _expenseService.DeleteExpenseAsync(_expense);
             await Navigation.PopAsync();
         }
     }

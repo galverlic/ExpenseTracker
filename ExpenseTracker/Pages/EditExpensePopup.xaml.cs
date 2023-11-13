@@ -1,42 +1,49 @@
 using CommunityToolkit.Maui.Views;
-using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using ExpenseTracker.Service; // Assuming ExpenseService is in this namespace
 
 namespace ExpenseTracker.Pages
 {
     public partial class EditExpensePopup : Popup
     {
-
         private readonly Expense _expense;
-        private readonly DatabaseService _databaseService;
+        private readonly ExpenseService _expenseService;
 
-        public EditExpensePopup(Expense expense, DatabaseService databaseService)
+        public EditExpensePopup(Expense expense, ExpenseService expenseService)
         {
             InitializeComponent();
             _expense = expense;
-            _databaseService = databaseService;
+            _expenseService = expenseService;
             BindingContext = _expense;
+            LoadCategories(); // Load categories into the picker
+        }
+
+        private async void LoadCategories()
+        {
+            var categories = await _expenseService.GetExpenseCategoriesAsync();
+            CategoryPicker.ItemsSource = categories;
+            CategoryPicker.SelectedItem = categories.FirstOrDefault(c => c.Id == _expense.CategoryId);
         }
 
         private async void OnSaveClicked(object sender, EventArgs e)
         {
-            var selectedCategory = (ExpenseCategory)CategoryPicker.SelectedItem;
+            // Validate input here (e.g., check if any field is empty)
 
             // Update the expense object with the new details
+            // This might be redundant if using TwoWay data binding
             _expense.Description = DescriptionEntry.Text;
-            _expense.CategoryId = selectedCategory.Id;
+            _expense.CategoryId = ((ExpenseCategory)CategoryPicker.SelectedItem).Id;
             _expense.Amount = Convert.ToDecimal(AmountEntry.Text);
-            _expense.Date = DateEntry.Date;
 
             // Call the method to update the expense
-            await _databaseService.UpdateExpenseAsync(_expense);
+            await _expenseService.UpdateExpenseAsync(_expense);
 
-            // Close the current page
-            if (this is Popup popup)
-            {
-                popup.Close();
-            }
-
+            // Close the popup
+            Close();
+        }
+        private void OnCancelClicked(object sender, EventArgs e)
+        {
+            Close();
         }
 
     }

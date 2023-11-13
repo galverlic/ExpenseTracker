@@ -7,9 +7,10 @@ namespace ExpenseTracker.Pages
     {
         private static DatabaseService _databaseService;
         private static ExpenseService _expenseService;
-
+        private static IncomeService _incomeService;
         public static DatabaseService DatabaseService => _databaseService;
         public static ExpenseService ExpenseService => _expenseService;
+        public static IncomeService IncomeService => _incomeService;
 
         public App()
         {
@@ -25,6 +26,7 @@ namespace ExpenseTracker.Pages
             _databaseService = new DatabaseService(dbPath);
             await _databaseService.InitializeAsync(); // This should be an async method that wraps CreateTablesAsync
             _expenseService = new ExpenseService(_databaseService.GetConnection());
+            _incomeService = new IncomeService(_databaseService.GetConnection());
         }
     }
 

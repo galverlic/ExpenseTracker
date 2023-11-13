@@ -1,11 +1,11 @@
-using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using ExpenseTracker.Service;
 
 namespace ExpenseTracker.Pages;
 
 public partial class AllExpensesPage : ContentPage
 {
-    private readonly DatabaseService _databaseService;
+    private readonly ExpenseService _expenseService;
 
     public AllExpensesPage()
     {
@@ -13,16 +13,16 @@ public partial class AllExpensesPage : ContentPage
         LoadExpenses();
     }
 
-    public AllExpensesPage(DatabaseService databaseService)
+    public AllExpensesPage(ExpenseService expenseService)
     {
         InitializeComponent();
-        _databaseService = databaseService;
+        _expenseService = expenseService;
         LoadExpenses();
     }
 
     private async void LoadExpenses()
     {
-        var expenses = await App.DatabaseService.GetExpensesAsync();
+        var expenses = await App.ExpenseService.GetExpensesAsync();
         ExpensesCollectionView.ItemsSource = expenses;
     }
 
@@ -31,7 +31,7 @@ public partial class AllExpensesPage : ContentPage
         if (e.CurrentSelection.FirstOrDefault() is Expense selectedExpense)
         {
             // Assuming you have a reference to DatabaseService as _databaseService
-            await Navigation.PushAsync(new ExpenseDetailPage(selectedExpense, _databaseService));
+            await Navigation.PushAsync(new ExpenseDetailPage(selectedExpense, _expenseService));
         }
         ((CollectionView)sender).SelectedItem = null;
     }

@@ -1,5 +1,5 @@
-using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using ExpenseTracker.Service;
 using System.Collections.ObjectModel;
 
 namespace ExpenseTracker.Pages;
@@ -7,11 +7,11 @@ namespace ExpenseTracker.Pages;
 public partial class AddIncomePage : ContentPage
 {
     private readonly ObservableCollection<IncomeCategory> _categories;
-    private readonly DatabaseService _databaseService;
-    public AddIncomePage(DatabaseService databaseService)
+    private readonly IncomeService _incomeService;
+    public AddIncomePage(IncomeService incomeService)
     {
         InitializeComponent();
-        _databaseService = databaseService;
+        _incomeService = incomeService;
         _categories = new ObservableCollection<IncomeCategory>();
         CategoryPicker.ItemsSource = _categories;
         LoadCategoriesAndDefaults();
@@ -19,13 +19,13 @@ public partial class AddIncomePage : ContentPage
 
     private async void LoadCategoriesAndDefaults()
     {
-        await App.DatabaseService.AddDefaultIncomeCategoriesAsync();
+        await App.IncomeService.AddDefaultIncomeCategoriesAsync();
         LoadCategories();
     }
 
     private async void LoadCategories()
     {
-        var categories = await App.DatabaseService.GetIncomeCategoriesAsync();
+        var categories = await App.IncomeService.GetIncomeCategoriesAsync();
         _categories.Clear();
         foreach (var category in categories) _categories.Add(category);
 
@@ -48,7 +48,7 @@ public partial class AddIncomePage : ContentPage
                 return;
             }
 
-            var expense = new Expense
+            var income = new Income
             {
                 Description = DescriptionEntry.Text,
                 Amount = amount,
@@ -56,7 +56,7 @@ public partial class AddIncomePage : ContentPage
                 CategoryId = selectedCategory.Id
             };
 
-            await _databaseService.SaveExpenseAsync(expense);
+            await _incomeService.SaveIncomeAsync(income);
 
             // Optionally clear the form or navigate away after saving
             DescriptionEntry.Text = string.Empty;
