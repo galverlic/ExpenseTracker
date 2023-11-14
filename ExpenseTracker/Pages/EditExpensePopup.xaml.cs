@@ -1,6 +1,7 @@
 using CommunityToolkit.Maui.Views;
 using ExpenseTracker.Models;
 using ExpenseTracker.Service; // Assuming ExpenseService is in this namespace
+using System.Collections.ObjectModel;
 
 namespace ExpenseTracker.Pages
 {
@@ -8,32 +9,61 @@ namespace ExpenseTracker.Pages
     {
         private readonly Expense _expense;
         private readonly ExpenseService _expenseService;
+        private readonly ObservableCollection<ExpenseCategory> _categories;
+
 
         public EditExpensePopup(Expense expense, ExpenseService expenseService)
         {
             InitializeComponent();
+
+            if (expense == null)
+                throw new ArgumentNullException(nameof(expense));
+
+            if (expenseService == null)
+                throw new ArgumentNullException(nameof(expenseService));
+
             _expense = expense;
             _expenseService = expenseService;
+            _categories = new ObservableCollection<ExpenseCategory>();
+            CategoryPicker.ItemsSource = _categories;
             BindingContext = _expense;
-            LoadCategories(); // Load categories into the picker
+            LoadCategoriesAndDefaults();
         }
 
+        private async void LoadCategoriesAndDefaults()
+        {
+            await _expenseService.AddDefaultExpenseCategoriesAsync();
+            LoadCategories();
+        }
         private async void LoadCategories()
         {
             var categories = await _expenseService.GetExpenseCategoriesAsync();
-            CategoryPicker.ItemsSource = categories;
-            CategoryPicker.SelectedItem = categories.FirstOrDefault(c => c.Id == _expense.CategoryId);
+            _categories.Clear();
+            foreach (var category in categories) _categories.Add(category);
+            _categories.Add(new ExpenseCategory { Name = "Add your own" });
         }
+
 
         private async void OnSaveClicked(object sender, EventArgs e)
         {
-            // Validate input here (e.g., check if any field is empty)
+            // Validate input
+            if (!decimal.TryParse(AmountEntry.Text, out var amount))
+            {
+                // Handle invalid amount input (e.g., show a message or highlight the field)
+                return;
+            }
+
+            var selectedCategory = (ExpenseCategory)CategoryPicker.SelectedItem;
+            if (selectedCategory == null)
+            {
+                // Handle unselected category (e.g., show a message or highlight the field)
+                return;
+            }
 
             // Update the expense object with the new details
-            // This might be redundant if using TwoWay data binding
             _expense.Description = DescriptionEntry.Text;
-            _expense.CategoryId = ((ExpenseCategory)CategoryPicker.SelectedItem).Id;
-            _expense.Amount = Convert.ToDecimal(AmountEntry.Text);
+            _expense.CategoryId = selectedCategory.Id;
+            _expense.Amount = amount;
 
             // Call the method to update the expense
             await _expenseService.UpdateExpenseAsync(_expense);
@@ -41,6 +71,7 @@ namespace ExpenseTracker.Pages
             // Close the popup
             Close();
         }
+
         private void OnCancelClicked(object sender, EventArgs e)
         {
             Close();

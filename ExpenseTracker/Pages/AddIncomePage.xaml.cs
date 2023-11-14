@@ -19,13 +19,13 @@ public partial class AddIncomePage : ContentPage
 
     private async void LoadCategoriesAndDefaults()
     {
-        await App.IncomeService.AddDefaultIncomeCategoriesAsync();
+        await _incomeService.AddDefaultIncomeCategoriesAsync();
         LoadCategories();
     }
 
     private async void LoadCategories()
     {
-        var categories = await App.IncomeService.GetIncomeCategoriesAsync();
+        var categories = await _incomeService.GetIncomeCategoriesAsync();
         _categories.Clear();
         foreach (var category in categories) _categories.Add(category);
 

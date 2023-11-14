@@ -23,6 +23,10 @@ public partial class ExpenseDetailPage : ContentPage
         var editExpensePopup = new EditExpensePopup(expenseToEdit, _expenseService);
 
         // This is the correct way to display a Popup
+        if (editExpensePopup == null)
+        {
+            throw new InvalidOperationException("editExpensePopup is null");
+        }
         await this.ShowPopupAsync(editExpensePopup);
     }
 

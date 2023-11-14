@@ -1,48 +1,45 @@
-﻿using ExpenseTracker.Data;
-using ExpenseTracker.Models;
-using ExpenseTracker.Service;
-using System.Collections.ObjectModel;
+﻿using ExpenseTracker.Service;
 using System.Diagnostics;
 
 namespace ExpenseTracker.Pages;
 
 public partial class MainPage : ContentPage
 {
-    private readonly ObservableCollection<ExpenseCategory> _categories;
-    private readonly DatabaseService _databaseService;
     private readonly ExpenseService _expenseService;
-    // private readonly ObservableCollection<Expense> _expenses;
     private readonly IncomeService _incomeService;
-    // private readonly ObservableCollection<Income> _incomes;
 
+    // Constructor with service dependencies
     public MainPage()
     {
         InitializeComponent();
-        try
-        {
-            _databaseService =
-                new DatabaseService(Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "expenses.db3"));
-        }
-        catch (Exception ex)
-        {
-            // Handle the exception, for example, log it or display an alert.
-            Debug.WriteLine($"Database initialization failed: {ex.Message}");
-        }
+
+        // Manually resolve the services
+        _expenseService = ((App)Application.Current).ServiceProvider.GetService<ExpenseService>();
+        _incomeService = ((App)Application.Current).ServiceProvider.GetService<IncomeService>();
+
+        // Additional initialization if needed
     }
 
-    public MainPage(ExpenseService expenseService)
-    {
-        InitializeComponent();
-        _expenseService = expenseService;
-    }
 
     private async void OnAddIncomeClicked(object sender, EventArgs e)
     {
-        var addIncomePage = new AddIncomePage(_incomeService);
-        await Navigation.PushAsync(addIncomePage);
+        if (_incomeService != null)
+        {
+            var addIncomePage = new AddIncomePage(_incomeService);
+            await Navigation.PushAsync(addIncomePage);
+        }
+        else
+        {
+            // Log the error or inform the user
+            Debug.WriteLine("IncomeService is not initialized.");
+            // Optionally display an alert to the user
+            await DisplayAlert("Error", "Service is not available. Please try again later.", "OK");
+        }
+
+
 
     }
+
     private async void OnAddExpenseClicked(object sender, EventArgs e)
     {
         var addExpensesPage = new AddExpensePage(_expenseService);
@@ -55,10 +52,11 @@ public partial class MainPage : ContentPage
         await Navigation.PushAsync(expensesPieChartPage);
     }
 
-
     private async void OnViewAllExpensesClicked(object sender, EventArgs e)
     {
         var allExpensesPage = new AllExpensesPage(_expenseService);
         await Navigation.PushAsync(allExpensesPage);
     }
+
+    // Other methods and event handlers...
 }

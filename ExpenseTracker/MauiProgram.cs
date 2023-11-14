@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using ExpenseTracker.Data;
 using ExpenseTracker.Pages;
+using ExpenseTracker.Service;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
 
@@ -24,6 +25,9 @@ namespace ExpenseTracker
                     fonts.AddFont("Montserrat-VariableFont_wght", "Montserrat2");
                 });
             builder.Services.AddSingleton<DatabaseService>();
+            builder.Services.AddSingleton<ExpenseService>();
+            builder.Services.AddSingleton<IncomeService>();
+
 
 
 #if DEBUG

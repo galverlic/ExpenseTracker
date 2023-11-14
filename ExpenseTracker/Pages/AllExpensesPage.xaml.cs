@@ -7,12 +7,6 @@ public partial class AllExpensesPage : ContentPage
 {
     private readonly ExpenseService _expenseService;
 
-    public AllExpensesPage()
-    {
-        InitializeComponent();
-        LoadExpenses();
-    }
-
     public AllExpensesPage(ExpenseService expenseService)
     {
         InitializeComponent();
@@ -22,7 +16,7 @@ public partial class AllExpensesPage : ContentPage
 
     private async void LoadExpenses()
     {
-        var expenses = await App.ExpenseService.GetExpensesAsync();
+        var expenses = await _expenseService.GetExpensesAsync();
         ExpensesCollectionView.ItemsSource = expenses;
     }
 

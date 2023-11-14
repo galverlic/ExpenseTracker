@@ -5,29 +5,42 @@ namespace ExpenseTracker.Pages
 {
     public partial class App : Application
     {
-        private static DatabaseService _databaseService;
-        private static ExpenseService _expenseService;
-        private static IncomeService _incomeService;
-        public static DatabaseService DatabaseService => _databaseService;
-        public static ExpenseService ExpenseService => _expenseService;
-        public static IncomeService IncomeService => _incomeService;
+        public IServiceProvider ServiceProvider { get; private set; }
 
         public App()
         {
             InitializeComponent();
+            var services = new ServiceCollection();
+            ConfigureServices(services);
+            ServiceProvider = services.BuildServiceProvider();
 
-            MainPage = new AppShell();
-            InitializeServicesAsync();
+            // Set the main page
+            MainPage = new SplashPage();
         }
 
-        private async Task InitializeServicesAsync()
+        protected override async void OnStart()
+        {
+            // Perform any asynchronous initialization here
+            var databaseService = ServiceProvider.GetService<DatabaseService>();
+            if (databaseService != null)
+            {
+                await databaseService.InitializeAsync();
+            }
+
+            // After initialization, set the main page
+            MainPage = new AppShell(ServiceProvider);
+        }
+        private async Task ConfigureServices(IServiceCollection services)
         {
             var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "expenses.db3");
-            _databaseService = new DatabaseService(dbPath);
-            await _databaseService.InitializeAsync(); // This should be an async method that wraps CreateTablesAsync
-            _expenseService = new ExpenseService(_databaseService.GetConnection());
-            _incomeService = new IncomeService(_databaseService.GetConnection());
+            var databaseService = new DatabaseService(dbPath);
+
+
+            // Register services
+            services.AddSingleton(databaseService);
+            services.AddSingleton(databaseService.GetConnection());
+            services.AddSingleton<ExpenseService>();
+            services.AddSingleton<IncomeService>();
         }
     }
-
 }

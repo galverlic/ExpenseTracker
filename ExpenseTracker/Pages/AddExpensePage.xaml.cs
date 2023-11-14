@@ -20,13 +20,13 @@ public partial class AddExpensePage : ContentPage
 
     private async void LoadCategoriesAndDefaults()
     {
-        await App.ExpenseService.AddDefaultExpenseCategoriesAsync();
+        await _expenseService.AddDefaultExpenseCategoriesAsync();
         LoadCategories();
     }
 
     private async void LoadCategories()
     {
-        var categories = await App.ExpenseService.GetExpenseCategoriesAsync();
+        var categories = await _expenseService.GetExpenseCategoriesAsync();
         _categories.Clear();
         foreach (var category in categories) _categories.Add(category);
         _categories.Add(new ExpenseCategory { Name = "Add your own" });
@@ -48,7 +48,7 @@ public partial class AddExpensePage : ContentPage
         if (!string.IsNullOrWhiteSpace(result))
         {
             var newCategory = new ExpenseCategory { Name = result };
-            await App.ExpenseService.SaveExpenseCategoryAsync(newCategory);
+            await _expenseService.SaveExpenseCategoryAsync(newCategory);
             _categories.Add(newCategory);
             CategoryPicker.SelectedItem = newCategory;
         }
