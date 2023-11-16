@@ -21,11 +21,12 @@ namespace ExpenseTracker.Pages
 
         private void RegisterRoutes()
         {
-
             Routing.RegisterRoute(nameof(AddExpensePage), typeof(AddExpensePage));
             Routing.RegisterRoute(nameof(AddIncomePage), typeof(AddIncomePage));
+            Routing.RegisterRoute(nameof(AllExpensesPage), typeof(AllExpensesPage));
             Routing.RegisterRoute(nameof(EditExpensePopup), typeof(EditExpensePopup));
             Routing.RegisterRoute(nameof(ExpenseDetailPage), typeof(ExpenseDetailPage));
+            Routing.RegisterRoute(nameof(ExpensesPieChartPage), typeof(ExpensesPieChartPage));
 
         }
     }

@@ -25,6 +25,7 @@
                 Grid.Column="1"
                 Placeholder="Description"
                 PlaceholderColor="#9E9E9E"
+                Text="{Binding Description}"
                 TextColor="#212121"
                 FontSize="Medium" />
             </Grid>
@@ -38,12 +39,13 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Entry x:Name="AmountEntry"
-             Grid.Column="1"
-             Placeholder="Amount"
-             Keyboard="Numeric"
-             PlaceholderColor="#9E9E9E"
-             TextColor="#212121"
-             FontSize="Medium" />
+                 Grid.Column="1"
+                 Placeholder="Amount"
+                 Keyboard="Numeric"
+                 PlaceholderColor="#9E9E9E"
+                 Text="{Binding Amount}"
+                 TextColor="#212121"
+                 FontSize="Medium" />
             </Grid>
         </Frame>
 
@@ -59,6 +61,7 @@
                  Title="Category"
                  BackgroundColor="Transparent"
                  TextColor="#212121"
+                 SelectedItem="{Binding SelectedCategory}"
                  ItemDisplayBinding="{Binding Name}"
                  FontSize="Medium" />
             </Grid>
