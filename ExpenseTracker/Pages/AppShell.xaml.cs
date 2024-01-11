@@ -15,9 +15,16 @@ namespace ExpenseTracker.Pages
             var expenseService = serviceProvider.GetService<ExpenseService>();
             // You can now use expenseService as needed
 
-            // Navigate to MainPage on startup
-            GoToAsync("//MainPage").ConfigureAwait(false);
+
+
         }
+
+        protected override async void OnNavigatedTo(NavigatedToEventArgs args)
+        {
+            base.OnNavigatedTo(args);
+            await GoToAsync("//MainPage");
+        }
+
 
         private void RegisterRoutes()
         {
@@ -27,6 +34,7 @@ namespace ExpenseTracker.Pages
             Routing.RegisterRoute(nameof(EditExpensePopup), typeof(EditExpensePopup));
             Routing.RegisterRoute(nameof(ExpenseDetailPage), typeof(ExpenseDetailPage));
             Routing.RegisterRoute(nameof(ExpensesPieChartPage), typeof(ExpensesPieChartPage));
+
 
         }
     }

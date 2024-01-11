@@ -1,0 +1,72 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpenseTracker.Pages.NewMainPage"
+             BackgroundColor="#f0f4ff">
+
+    <Shell.TitleView>
+        <Label Text="Expense Tracker" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#5E35B1" />
+    </Shell.TitleView>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="20">
+
+            <!-- User greeting and balance card -->
+            <Frame CornerRadius="20" HasShadow="True" Padding="20" Margin="0,0,0,10">
+                <StackLayout>
+                    <Label Text="Welcome, John Doe" FontAttributes="Bold" HorizontalOptions="Start"/>
+                    <Frame BackgroundColor="#ffffff" Padding="15" CornerRadius="20" HasShadow="False">
+                        <StackLayout>
+                            <Label Text="Total Balance" FontSize="Small" TextColor="#a1a1a1"/>
+                            <Label Text="$ 4800.00" FontSize="Large" FontAttributes="Bold" TextColor="#000000"/>
+                        </StackLayout>
+                    </Frame>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                        <Frame BackgroundColor="#d1fae5" Padding="15" CornerRadius="20" HasShadow="False" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Income" FontSize="Small" TextColor="#16a34a"/>
+                                <Label Text="$ 2,500.00" FontSize="Small" TextColor="#000000"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="#ffe4e6" Padding="15" CornerRadius="20" HasShadow="False" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Expenses" FontSize="Small" TextColor="#dc2626"/>
+                                <Label Text="$ 800.00" FontSize="Small" TextColor="#000000"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <!-- Transactions CollectionView -->
+            <Label Text="Transactions" FontAttributes="Bold" HorizontalOptions="Start"/>
+            <CollectionView ItemsSource="{Binding Transactions}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="20" HasShadow="True" Padding="10" Margin="0,0,0,10">
+                            <Grid ColumnSpacing="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <!-- Icon -->
+                                <Image Source="{Binding Icon}" Aspect="AspectFit" HeightRequest="30" WidthRequest="30" Grid.Column="0" />
+                                <!-- Description and Amount -->
+                                <StackLayout Grid.Column="1" HorizontalOptions="Start">
+                                    <Label Text="{Binding Description}" FontSize="Medium" />
+                                    <Label Text="{Binding Date}" FontSize="Small" TextColor="#a1a1a1" />
+                                </StackLayout>
+                                <!-- Amount -->
+                                <Label Text="{Binding Amount}" FontSize="Medium" HorizontalOptions="End" Grid.Column="2" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

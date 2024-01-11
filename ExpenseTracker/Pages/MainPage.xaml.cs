@@ -36,8 +36,6 @@ public partial class MainPage : ContentPage
             await DisplayAlert("Error", "Service is not available. Please try again later.", "OK");
         }
 
-
-
     }
 
     private async void OnAddExpenseClicked(object sender, EventArgs e)
